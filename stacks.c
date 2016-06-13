@@ -61,8 +61,7 @@ struct stack *create_stack() {
 	new->top = NULL;
 	new->left = NULL;
 	new->right = NULL;
-	return new;
-}
+	return new;              }
 
 
 void destroy_stack(struct stack * s) {
@@ -195,7 +194,7 @@ struct stack * process(char * str, struct stack * s, int cur){
 		else if( c == '+' || c == '-' || c =='*' || c == '/') op = c;
 
 		else if( c == '[') {
-			loop_push(0, i, cur, loops);
+			loop_push(0, i, c, loops);
 		}
 
 		else if ( c == ']') {
@@ -286,8 +285,14 @@ struct stack * process(char * str, struct stack * s, int cur){
 
 
 
-int main() {
-	char * str = readstr();
+int main(int argc, char **argv) {
+	char * str = NULL;
+	if (argc == 1) {
+		str = readstr();
+	}
+	else if (argc == 2) {
+		str = argv[1];
+	}
 
 	struct stack * s = create_stack();
 	loops = create_stack();
